@@ -10,8 +10,8 @@ const generateRandomColors = (lengthOfItems: number) => {
 }
 
 export default function SpinWheel() {
-  const wheelContainerRef = useRef(null);
-  const wheelRef = useRef(null);
+  const wheelContainerRef = useRef<HTMLDivElement | null>(null);
+  const wheelRef = useRef<Wheel | null>(null);
 
   const [labelsInput, setLabelsInput] = useState('Dog, Cat, Fish');
   const [items, setItems] = useState([
@@ -22,20 +22,20 @@ export default function SpinWheel() {
   const [colors, setColors] = useState(['#ff9999', '#99ff99', '#9999ff'])
 
   useEffect(() => {
-    if (!wheelContainerRef.current || wheelRef.current) {
-        return;
-    }
+    const container = wheelContainerRef.current;
+    if (!container) return;
 
-    if (wheelRef.current?.destroy) {
+    if (wheelRef.current) {
         wheelRef.current.destroy()
+        wheelRef.current = null;
     }
-
-    const wheel = new Wheel(wheelContainerRef.current, {items, itemLabelRadiusMax: 0.5, itemBackgroundColors: colors, 
+ 
+    const wheel = new Wheel(wheelContainerRef.current!, {items, itemLabelRadiusMax: 0.5, itemBackgroundColors: colors, 
       itemLabelFontSizeMax: 40,});
     wheelRef.current = wheel;
 
     // Optional events
-    wheel.onRest = (e: { currentIndex: any; }) => console.log('Stopped at index:', e.currentIndex);
+    wheel.onRest = (e: { currentIndex: number }) => console.log('Stopped at index:', e.currentIndex);
 
     return () => {
       // Optional: cleanup
