@@ -74,23 +74,26 @@ export default function SpinWheel() {
 
   return (
     <div>
-      <div
-        ref={wheelContainerRef}
-        style={{ width: 400, height: 400, margin: 'auto' }}
-      />
-      <button onClick={handleSpin}>Spin</button>
-      <label>
-        Enter labels (comma separated):
-        <input
-          type="text"
-          value={labelsInput}
-          onChange={handleLabelsChange}
-          style={{ width: '300px', marginLeft: '10px' }}
-        />
-      </label>
-      <button onClick={updateWheelItems} style={{marginLeft: '10px'}}>
-        Update Wheel
-      </button>
+        <div style={{ position: 'relative', width: '400px', height: '400px' }}>
+            <div className="wheel-pointer"></div>
+            <div
+                ref={wheelContainerRef}
+                style={{ width: 400, height: 400, margin: 'auto' }}
+            />
+            <button onClick={handleSpin}>Spin</button>
+            <label>
+                Enter labels (comma separated):
+                <input
+                type="text"
+                value={labelsInput}
+                onChange={handleLabelsChange}
+                style={{ width: '300px', marginLeft: '10px' }}
+                />
+            </label>
+            <button onClick={updateWheelItems} style={{marginLeft: '10px'}}>
+                Update Wheel
+            </button>
+        </div>
     </div>
   );
 }
