@@ -1,5 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type SetStateAction } from 'react';
 import { Wheel } from 'spin-wheel';
+
+const generateRandomColors = (lengthOfItems: number) => {
+    const colors = []
+    for (let i = 0; i < lengthOfItems; i++) {
+        colors.push('#' + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0'));
+    }
+    return colors; 
+}
 
 export default function SpinWheel() {
   const wheelContainerRef = useRef(null);
@@ -11,6 +19,7 @@ export default function SpinWheel() {
     { label: 'Cat'},
     { label: 'Fish'}
   ])
+  const [colors, setColors] = useState(['#ff9999', '#99ff99', '#9999ff'])
 
   useEffect(() => {
     if (!wheelContainerRef.current || wheelRef.current) {
@@ -21,7 +30,7 @@ export default function SpinWheel() {
         wheelRef.current.destroy()
     }
 
-    const wheel = new Wheel(wheelContainerRef.current, {items, itemLabelRadiusMax: 0.5, itemBackgroundColors: ['#ff9999', '#99ff99', '#9999ff'],
+    const wheel = new Wheel(wheelContainerRef.current, {items, itemLabelRadiusMax: 0.5, itemBackgroundColors: colors, 
       itemLabelFontSizeMax: 40,});
     wheelRef.current = wheel;
 
@@ -35,9 +44,9 @@ export default function SpinWheel() {
       }
       wheelRef.current = null;
     };
-  }, [items]);
+  }, [items, colors]);
 
-  const handleLabelsChange = (e) => {
+  const handleLabelsChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setLabelsInput(e.target.value);
   };
 
@@ -51,6 +60,9 @@ export default function SpinWheel() {
     // Create new items array
     const newItems = newLabels.map(label => ({ label }));
     setItems(newItems);
+
+    const newColors = generateRandomColors(newItems.length);
+    setColors(newColors);
   };
 
   const handleSpin = () => {
