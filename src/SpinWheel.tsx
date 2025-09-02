@@ -80,7 +80,7 @@ export default function SpinWheel() {
                 ref={wheelContainerRef}
                 style={{ width: 400, height: 400, margin: 'auto' }}
             />
-            <button onClick={handleSpin}>Spin</button>
+            <button onClick={handleSpin} style={{width: 400}}>Spin</button>
             <label>
                 Enter labels (comma separated):
                 <input
@@ -90,7 +90,7 @@ export default function SpinWheel() {
                 style={{ width: '300px', marginLeft: '10px' }}
                 />
             </label>
-            <button onClick={updateWheelItems} style={{marginLeft: '10px'}}>
+            <button onClick={updateWheelItems} style={{marginLeft: '10px', width: 400}}>
                 Update Wheel
             </button>
         </div>
