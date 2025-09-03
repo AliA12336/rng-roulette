@@ -1,12 +1,24 @@
 import { useEffect, useRef, useState, type SetStateAction } from 'react';
 import { Wheel } from 'spin-wheel';
 
+const isTooDark = (hex: string) => {
+  const r = parseInt(hex.substr(1, 2), 16);
+  const g = parseInt(hex.substr(3, 2), 16);
+  const b = parseInt(hex.substr(5, 2), 16);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness < 40;
+}
+
 const generateRandomColors = (lengthOfItems: number) => {
-    const colors = []
+    const colors = [];
     for (let i = 0; i < lengthOfItems; i++) {
-        colors.push('#' + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0'));
+        let color = '#000000';
+        do {
+            color = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
+        } while (isTooDark(color));
+        colors.push(color);
     }
-    return colors; 
+    return colors;
 }
 
 export default function SpinWheel() {
@@ -34,11 +46,9 @@ export default function SpinWheel() {
       itemLabelFontSizeMax: 40,});
     wheelRef.current = wheel;
 
-    // Optional events
     wheel.onRest = (e: { currentIndex: number }) => console.log('Stopped at index:', e.currentIndex);
 
     return () => {
-      // Optional: cleanup
       if (wheelContainerRef.current) {
       wheelContainerRef.current.innerHTML = '';
       }
@@ -50,14 +60,12 @@ export default function SpinWheel() {
     setLabelsInput(e.target.value);
   };
 
-  // Handler for "Update Wheel" button click
   const updateWheelItems = () => {
     const newLabels = labelsInput
       .split(',')
       .map(label => label.trim())
       .filter(label => label.length > 0);
 
-    // Create new items array
     const newItems = newLabels.map(label => ({ label }));
     setItems(newItems);
 
