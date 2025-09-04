@@ -1,5 +1,24 @@
 import { useEffect, useRef, useState, type SetStateAction } from 'react';
 import { Wheel } from 'spin-wheel';
+import confetti from 'canvas-confetti';
+import './App.css';
+
+
+const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.5 },
+    });
+
+    confetti({
+      particleCount: 50,
+      spread: 100,
+      startVelocity: 30,
+      origin: { y: 0.6 },
+      colors: ['#ffcc00', '#ffffff', '#00ccff'],
+    });
+  };
 
 const isTooDark = (hex: string) => {
   const r = parseInt(hex.substr(1, 2), 16);
@@ -46,7 +65,15 @@ export default function SpinWheel() {
       itemLabelFontSizeMax: 40,});
     wheelRef.current = wheel;
 
-    wheel.onRest = (e: { currentIndex: number }) => console.log('Stopped at index:', e.currentIndex);
+    wheel.onSpin = () => {
+        wheelContainerRef.current?.classList.add('wheel-glow');
+    }
+
+    wheel.onRest = (e: { currentIndex: number }) => {
+        console.log('Stopped at index:', e.currentIndex);
+        wheelContainerRef.current?.classList.remove('wheel-glow');
+        triggerConfetti();
+    }
 
     return () => {
       if (wheelContainerRef.current) {
