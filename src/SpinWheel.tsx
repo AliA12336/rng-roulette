@@ -102,7 +102,7 @@ export default function SpinWheel() {
 
   const handleSpin = () => {
     if (wheelRef.current) {
-      const itemIndex = Math.floor(Math.random() * 3); // Pick a random item
+      const itemIndex = Math.floor(Math.random() * 3);
       wheelRef.current.spinToItem(itemIndex, 3000, true, 2, 1);
     }
   };
