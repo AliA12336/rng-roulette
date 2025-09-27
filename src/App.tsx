@@ -1,4 +1,4 @@
-import SpinWheel from './SpinWheel'
+import SpinWheel from './components/SpinWheel'
 import './App.css'
 import { CoffeeMug } from './components/Coffeemug'
 import { Plate } from './components/Plate'
