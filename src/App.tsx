@@ -8,8 +8,7 @@ function App() {
     return (
       
       <Layout> 
-        <div className="flex-1 flex items-center justify-center bg-gray-100">
-          <h1>Spin the Wheel!</h1>
+        <div className="flex-1 flex items-center justify-center">
             <Plate>
               <CoffeeMug />
             </Plate>       
