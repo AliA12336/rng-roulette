@@ -10,6 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { Input } from "@/components/ui/input"
 import { XIcon } from "lucide-react"
@@ -47,6 +48,7 @@ const items = [
 
 export function AppSidebar() {
   const choiceCtx = useContext(ChoicesContext)
+  const { toggleSidebar } = useSidebar();
 
   if (!choiceCtx) throw new Error("choices context must be used within Provider")
   const { choices, setChoices } = choiceCtx;
@@ -85,7 +87,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenuButton>Save Changes</SidebarMenuButton>
-        <SidebarMenuButton>Close</SidebarMenuButton>
+        <SidebarMenuButton onClick={toggleSidebar}>Close</SidebarMenuButton>
         </SidebarFooter>
     </Sidebar>
   )
