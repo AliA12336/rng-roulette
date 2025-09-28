@@ -6,7 +6,6 @@ import Layout from './Layout'
 
 function App() {
     return (
-      
       <Layout> 
         <div className="flex-1 flex items-center justify-center">
             <Plate>

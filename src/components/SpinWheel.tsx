@@ -4,19 +4,17 @@ import confetti from 'canvas-confetti';
 import '../App.css';
 
 
-const triggerConfetti = () => {
+const triggerConfetti = (el: HTMLDivElement | null) => {
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+  const x =(rect.left + rect.width / 2) / window.innerWidth;
+  const y = (rect.top + rect.height / 2) / window.innerHeight;
+
     confetti({
       particleCount: 100,
       spread: 70,
-      origin: { y: 0.5 },
-    });
-
-    confetti({
-      particleCount: 50,
-      spread: 100,
-      startVelocity: 30,
-      origin: { y: 0.6 },
-      colors: ['#ffcc00', '#ffffff', '#00ccff'],
+      origin: { x: x, y: y },
+      colors: ["#6f4e37"]
     });
   };
 
@@ -72,7 +70,7 @@ export default function SpinWheel() {
     wheel.onRest = (e: { currentIndex: number }) => {
         console.log('Stopped at index:', e.currentIndex);
         wheelContainerRef.current?.classList.remove('wheel-glow');
-        triggerConfetti();
+        triggerConfetti(wheelContainerRef.current);
     }
 
     return () => {
@@ -110,8 +108,13 @@ export default function SpinWheel() {
   return (
     <div>
         <div style={{ position: 'relative', width: '400px', height: '350px' }}>
-            <div className="wheel-pointer"></div>
+            <div className="wheel-pointer-border" style={{position: 'absolute', backgroundColor: "#6f4e37", width: '400px', height: '350px', left: "45%", bottom: "5%", clipPath: 'path("M 3.85 15.4 A 15.4 15.4 90 0 1 34.65 15.4 L 26.18 53.515 Q 20.02 70.455 14.245 53.13 Z")'}}>
+              <div className="wheel-pointer" style={{position: 'absolute', left: ".3%", top: ".3%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "green", width: '400px', height: '350px', clipPath: 'path("M 3.5 14 A 14 14 0 0 1 31.5 14 L 23.8 48.65 Q 18.2 64.05 12.95 48.3 Z")'}}>
+                <circle className="wheel-pointer-circle" style={{position: 'absolute', width: "10px", height: "10px", borderRadius: "50%", left: "3%", top: "3%", backgroundColor: "#6f4e37"}}/>
+              </div>
+            </div>
             <div
+            className="wheel"
                 ref={wheelContainerRef}
                 style={{ width: 350, height: 350, margin: 'auto' }}
             />
