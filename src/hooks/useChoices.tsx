@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type PropsWithChildren } from "rea
 
 type Choice = {
     input: string,
-    id: number
+    id: string
 }
 type Choices = Choice[]
 

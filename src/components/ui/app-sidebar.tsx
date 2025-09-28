@@ -1,4 +1,3 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 import { XIcon } from "lucide-react"
 
 import {
@@ -16,51 +15,25 @@ import {
 import { Input } from "@/components/ui/input"
 import { useChoices } from "@/hooks/useChoices"
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    
-    icon: Settings,
-  },
-]
-
 export function AppSidebar() {
   const { choices, setChoices } = useChoices();
   const { toggleSidebar } = useSidebar();
 
   const handleAddEntry = () => {
-    setChoices([...choices, {input: "", id: choices.length}])
+    setChoices([...choices, {input: "", id: crypto.randomUUID()}])
   }
 
-  const handleUpdateEntry = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-  const newInput = e.target.value;
-    console.log("handle update entry", index, newInput)
-    const updatedChoices = choices.map((choice, i) => {
-      return i === index ? { ...choice, ["input"]: newInput, ["id"]: index} : choice
+  const handleUpdateEntry = (index: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const newInput = e.target.value;
+    const updatedChoices = choices.map((choice) => {
+      return choice.id === index ? { ...choice, ["input"]: newInput, ["id"]: index} : choice
     })
     
     setChoices(updatedChoices)
+  }
+
+  const handleRemoveEntry = (idToRemove: string) => {
+    setChoices(choices.filter(choice => choice.id != idToRemove))
   }
 
   return (
@@ -72,8 +45,8 @@ export function AppSidebar() {
             <SidebarMenu>
               {choices.map((choice) => (
                 <SidebarMenuItem key={choice.id} className="flex items-center justify-center">
-                  <Input className="mb-2 mt-2 flex-15" onChange={(e) => handleUpdateEntry(choice.id, e)} value={choice.input}/>
-                  <SidebarMenuButton className="flex-1"><XIcon /></SidebarMenuButton>
+                  <Input className="mb-2 mt-2 mr-1 flex-14" onChange={(e) => handleUpdateEntry(choice.id, e)} value={choice.input}/>
+                  <SidebarMenuButton className="flex-1" onClick={() => handleRemoveEntry(choice.id)}><XIcon /></SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
               <SidebarMenuButton onClick={handleAddEntry}>+ Add Entry</SidebarMenuButton>
@@ -82,8 +55,8 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton>Save Changes</SidebarMenuButton>
-        <SidebarMenuButton onClick={toggleSidebar}>Close</SidebarMenuButton>
+        <SidebarMenuButton className="flex items-center justify-center" style={{backgroundColor: "#d3cfc7"}}>Save Changes</SidebarMenuButton>
+        <SidebarMenuButton className="flex items-center justify-center" style={{backgroundColor: "#f5f5dc"}} onClick={toggleSidebar}>Close</SidebarMenuButton>
         </SidebarFooter>
     </Sidebar>
   )
