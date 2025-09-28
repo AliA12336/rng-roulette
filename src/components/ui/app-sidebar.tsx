@@ -73,9 +73,9 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {choices.map((choice) => (
-                <SidebarMenuItem key={choice.id} className="flex-1 flex items-center justify-center">
-                  <Input className="mb-2 mt-2 mr-2" onChange={(e) => handleUpdateEntry(choice.id, e)} value={choice.input}/>
-                  <XIcon />
+                <SidebarMenuItem key={choice.id} className="flex items-center justify-center">
+                  <Input className="mb-2 mt-2 flex-15" onChange={(e) => handleUpdateEntry(choice.id, e)} value={choice.input}/>
+                  <SidebarMenuButton className="flex-1"><XIcon /></SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
               <SidebarMenuButton onClick={handleAddEntry}>+ Add Entry</SidebarMenuButton>
