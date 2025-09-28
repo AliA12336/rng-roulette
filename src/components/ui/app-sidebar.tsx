@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/sidebar"
 import { Input } from "@/components/ui/input"
 import { XIcon } from "lucide-react"
+import { useContext } from "react"
+import { ChoicesContext } from "@/hooks/ChoicesContext"
 
 // Menu items.
 const items = [
@@ -44,6 +46,25 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const choiceCtx = useContext(ChoicesContext)
+
+  if (!choiceCtx) throw new Error("choices context must be used within Provider")
+  const { choices, setChoices } = choiceCtx;
+
+  const handleAddEntry = () => {
+    setChoices([...choices, {input: "", id: choices.length}])
+  }
+
+  const handleUpdateEntry = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const newInput = e.target.value;
+    console.log("handle update entry", index, newInput)
+    const updatedChoices = choices.map((choice, i) => {
+      return i === index ? { ...choice, ["input"]: newInput, ["id"]: index} : choice
+    })
+    
+    setChoices(updatedChoices)
+  }
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -51,20 +72,20 @@ export function AppSidebar() {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="flex-1 flex items-center justify-center">
-                  <Input className="mb-2 mt-2 mr-2"/>
+              {choices.map((choice) => (
+                <SidebarMenuItem key={choice.id} className="flex-1 flex items-center justify-center">
+                  <Input className="mb-2 mt-2 mr-2" onChange={(e) => handleUpdateEntry(choice.id, e)} value={choice.input}/>
                   <XIcon />
                 </SidebarMenuItem>
               ))}
-              <SidebarMenuButton >+ Add Entry</SidebarMenuButton>
+              <SidebarMenuButton onClick={handleAddEntry}>+ Add Entry</SidebarMenuButton>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton >Save Changes</SidebarMenuButton>
-        <SidebarMenuButton >Close</SidebarMenuButton>
+        <SidebarMenuButton>Save Changes</SidebarMenuButton>
+        <SidebarMenuButton>Close</SidebarMenuButton>
         </SidebarFooter>
     </Sidebar>
   )
