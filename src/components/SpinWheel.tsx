@@ -4,6 +4,7 @@ import confetti from 'canvas-confetti';
 
 import '../App.css';
 import { useChoices } from '@/hooks/useChoices';
+import { CirclePlay } from 'lucide-react';
 
 
 const triggerConfetti = (el: HTMLDivElement | null) => {
@@ -16,7 +17,7 @@ const triggerConfetti = (el: HTMLDivElement | null) => {
       particleCount: 100,
       spread: 70,
       origin: { x: x, y: y },
-      colors: ["#6f4e37"]
+      colors: ["#6f4e37", "#d3cfc7", "#f5f5dc"]
     });
   };
 
@@ -69,6 +70,14 @@ export default function SpinWheel() {
     };
   }, [choices]);
 
+  const handleSpin = () => {
+    if (wheelRef.current) {
+      const itemIndex = Math.floor(Math.random() * 3);
+      wheelRef.current.spinToItem(itemIndex, 3000, true, 2, 1);
+    }
+  };
+
+
   return (
     <div>
         <div style={{ position: 'relative', width: '400px', height: '350px' }}>
@@ -82,7 +91,7 @@ export default function SpinWheel() {
                 ref={wheelContainerRef}
                 style={{ width: 350, height: 350, margin: 'auto' }}
             />
-            {/* <button onClick={handleSpin} style={{width: 400}}>Spin</button> */}
+            <button style={{position: "absolute", left: "166px", top: "380px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", color: "#e07b39"}} onClick={handleSpin}><CirclePlay />Spin</button>
         </div>
     </div>
   );
