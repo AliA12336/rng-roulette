@@ -69,13 +69,6 @@ export default function SpinWheel() {
     };
   }, [choices]);
 
-  const handleSpin = () => {
-    if (wheelRef.current) {
-      const itemIndex = Math.floor(Math.random() * 3);
-      wheelRef.current.spinToItem(itemIndex, 3000, true, 2, 1);
-    }
-  };
-
   return (
     <div>
         <div style={{ position: 'relative', width: '400px', height: '350px' }}>
