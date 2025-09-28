@@ -55,8 +55,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton className="flex items-center justify-center" style={{backgroundColor: "#d3cfc7"}}>Save Changes</SidebarMenuButton>
-        <SidebarMenuButton className="flex items-center justify-center" style={{backgroundColor: "#f5f5dc"}} onClick={toggleSidebar}>Close</SidebarMenuButton>
+        <SidebarMenuButton className="flex items-center justify-center" style={{backgroundColor: "#d3cfc7"}} onClick={toggleSidebar}>Close</SidebarMenuButton>
         </SidebarFooter>
     </Sidebar>
   )
