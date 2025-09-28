@@ -1,4 +1,4 @@
-import { createContext, useState, type PropsWithChildren } from "react";
+import { createContext, useContext, useState, type PropsWithChildren } from "react";
 
 type Choice = {
     input: string,
@@ -21,4 +21,13 @@ export const ChoicesProvider = ({children}: PropsWithChildren) => {
             {children}
         </ChoicesContext.Provider>
     )
+}
+
+export const useChoices = () => {
+    const context = useContext(ChoicesContext)
+      if (!context) {
+        throw new Error("useChoices must be used within a ChoicesProvider.")
+      }
+    
+      return context
 }

@@ -1,6 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/ui/app-sidebar"
-import { ChoicesProvider } from "./hooks/ChoicesContext"
+import { ChoicesProvider } from "./hooks/useChoices"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

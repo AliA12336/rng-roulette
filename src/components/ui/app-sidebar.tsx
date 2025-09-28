@@ -1,4 +1,5 @@
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { XIcon } from "lucide-react"
 
 import {
   Sidebar,
@@ -13,9 +14,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { Input } from "@/components/ui/input"
-import { XIcon } from "lucide-react"
-import { useContext } from "react"
-import { ChoicesContext } from "@/hooks/ChoicesContext"
+import { useChoices } from "@/hooks/useChoices"
 
 // Menu items.
 const items = [
@@ -47,11 +46,8 @@ const items = [
 ]
 
 export function AppSidebar() {
-  const choiceCtx = useContext(ChoicesContext)
+  const { choices, setChoices } = useChoices();
   const { toggleSidebar } = useSidebar();
-
-  if (!choiceCtx) throw new Error("choices context must be used within Provider")
-  const { choices, setChoices } = choiceCtx;
 
   const handleAddEntry = () => {
     setChoices([...choices, {input: "", id: choices.length}])
