@@ -9,6 +9,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), VitePWA({
       registerType: "autoUpdate",
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+      },
       manifest: {
         name: "RNG Roulette",
         short_name: "rng roulette",
@@ -28,7 +31,7 @@ export default defineConfig({
             sizes: '512x512',
             type: 'image/png',
           }
-        ]
+        ],
       }
     })
   ],
