@@ -195,3 +195,11 @@
   animation: pulse-glow 1s infinite;
   border-radius: 50%;
 }
+
+.spin-button:hover {
+  border-color: #e07b39;
+  background-color: rgba(224, 123, 57, 0.2); 
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #e07b39;
+  font-weight: bold;
+}

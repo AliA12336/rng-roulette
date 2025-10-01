@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import '../App.css';
 import { useChoices } from '@/hooks/useChoices';
 import { CirclePlay } from 'lucide-react';
+import { Button } from './ui/button';
 
 
 const triggerConfetti = (el: HTMLDivElement | null) => {
@@ -76,23 +77,41 @@ export default function SpinWheel() {
       wheelRef.current.spinToItem(itemIndex, 3000, true, 2, 1);
     }
   };
-
-
+  
   return (
-    <div>
-        <div style={{ position: 'relative', width: '400px', height: '350px' }}>
-            <div className="wheel-pointer-border" style={{position: 'absolute', backgroundColor: "#6f4e37", width: '400px', height: '350px', left: "45%", bottom: "5%", clipPath: 'path("M 3.85 15.4 A 15.4 15.4 90 0 1 34.65 15.4 L 26.18 53.515 Q 20.02 70.455 14.245 53.13 Z")'}}>
-              <div className="wheel-pointer" style={{position: 'absolute', left: ".3%", top: ".3%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#d3cfc7", width: '400px', height: '350px', clipPath: 'path("M 3.5 14 A 14 14 0 0 1 31.5 14 L 23.8 48.65 Q 18.2 64.05 12.95 48.3 Z")'}}>
-                <div className="wheel-pointer-circle" style={{position: 'absolute', width: "10px", height: "10px", borderRadius: "50%", left: "3%", top: "3%", backgroundColor: "#6f4e37"}}/>
-              </div>
-            </div>
-            <div
-            className="wheel"
-                ref={wheelContainerRef}
-                style={{ width: 350, height: 350, margin: 'auto' }}
+  <div className="flex flex-col items-center">
+    <div className="relative w-[70vw] max-w-[400px] aspect-square rounded-full bg-[#6f4e37] border-[5px] border-white flex justify-center items-center">
+      <div
+            className="wheel w-[85%] h-[85%]"
+            ref={wheelContainerRef}
             />
-            <button style={{position: "absolute", left: "166px", top: "380px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", color: "#e07b39"}} onClick={handleSpin}><CirclePlay />Spin</button>
-        </div>
+      <svg
+          viewBox="0 0 400 350"
+          preserveAspectRatio="xMidYMid meet"
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            left: "45%",
+            bottom: "5%",
+            }}>
+          <path
+          className="wheel-pointer-border"
+          d="M 3.85 15.4 A 15.4 15.4 90 0 1 34.65 15.4 L 26.18 53.515 Q 20.02 70.455 14.245 53.13 Z"
+          fill="#6f4e37"
+          />
+          <path
+          className="wheel-pointer"
+          d="M 3.5 14 A 14 14 0 0 1 31.5 14 L 23.8 48.65 Q 18.2 64.05 12.95 48.3 Z"
+          fill="#d3cfc7"
+          />
+          <circle className="wheel-pointer-circle" cx="18" cy="10" r="5" fill="#6f4e37" />
+          </svg>
+          
     </div>
+             <Button className="spin-button mb-10 text-[#e07b39] hover:border-transparent flex-col items-center gap-0" style={{ backgroundColor: 'transparent', padding: 0 }} onClick={handleSpin}><CirclePlay /><span style={{ margin: 0, padding: 0, lineHeight: 1}}>Spin</span></Button>
+         
+  </div>
+            
   );
 }

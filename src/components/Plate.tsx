@@ -2,10 +2,10 @@ import { type PropsWithChildren } from "react"
 
 export const Plate = ({children}: PropsWithChildren) => {
     return (
-         <div className="plate-outside-border" style={{position: "relative", width: "580px", height: "580px", background: "#6f4e37", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", border: "5px solid #ffffff"}}>
-            <div className="plate-outside" style={{width: "550px", height: "550px", background: "#ffffff", borderRadius: "50%", boxShadow: "inset 0 0 8px #ccc", display: "flex", justifyContent: "center", alignItems: "center"}}>
-              <div className="plate-inside-border" style={{position: "relative", width: "540px", height: "540px", background: "#6f4e37", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", border: "1px solid #ffffff"}}>
-                <div className="plate-inside" style={{width: "530px", height: "530px", background: "#ffffff", borderRadius: "50%",  display: "flex", justifyContent: "center", alignItems: "center"}}>
+         <div className="plate-outside-border w-[90%] max-w-[580px] aspect-square rounded-full bg-[#6f4e37] border-[5px] border-white mx-auto relative flex justify-center items-center">
+            <div className="plate-outside w-[95%] aspect-square rounded-full bg-white shadow-[inset_0_0_8px_#ccc] flex justify-center items-center">
+              <div className="plate-inside-border w-[98%] aspect-square rounded-full bg-[#6f4e37] border border-white flex justify-center items-center">
+                <div className="plate-inside w-[98%] aspect-square rounded-full bg-white flex justify-center items-center">
                     <>{children}</>
                 </div>
               </div>

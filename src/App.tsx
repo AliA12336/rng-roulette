@@ -6,10 +6,12 @@ import Layout from './Layout'
 function App() {
     return (
         <Layout> 
-          <div className="flex-1 flex items-center justify-center">
+          <div style={{ width: '80vw', maxWidth: '580px', maxHeight: '80vw', margin: '0 auto', overflow: 'auto' }}>
+          <div className="flex items-center justify-center w-full">
               <Plate>
                 <CoffeeMug />
               </Plate>       
+        </div>
         </div>
         </Layout>
   )
