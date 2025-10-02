@@ -6,6 +6,7 @@ import '../App.css';
 import { useChoices } from '@/hooks/useChoices';
 import { CirclePlay } from 'lucide-react';
 import { Button } from './ui/button';
+import { MugHandle } from './MugHandle';
 
 
 const triggerConfetti = (el: HTMLDivElement | null) => {
@@ -80,7 +81,7 @@ export default function SpinWheel() {
   
   return (
   <div className="flex flex-col items-center">
-    <div className="relative w-[70vw] max-w-[400px] aspect-square rounded-full bg-[#6f4e37] border-[5px] border-white flex justify-center items-center">
+    <div className="relative w-[25vw] max-w-[400px] aspect-square rounded-full bg-[#6f4e37] border-[5px] border-white flex justify-center items-center">
       <div
             className="wheel w-[85%] h-[85%]"
             ref={wheelContainerRef}
@@ -107,7 +108,7 @@ export default function SpinWheel() {
           />
           <circle className="wheel-pointer-circle" cx="18" cy="10" r="5" fill="#6f4e37" />
           </svg>
-          
+          <MugHandle />
     </div>
              <Button className="spin-button mb-10 text-[#e07b39] hover:border-transparent flex-col items-center gap-0" style={{ backgroundColor: 'transparent', padding: 0 }} onClick={handleSpin}><CirclePlay /><span style={{ margin: 0, padding: 0, lineHeight: 1}}>Spin</span></Button>
          
